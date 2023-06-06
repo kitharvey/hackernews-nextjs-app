@@ -1,5 +1,5 @@
 import Comment from "@/components/Comment";
-import Post from "@/components/Post";
+import PostWrapper from "@/components/PostWrapper";
 import { getItemsList, getUser } from "@/lib/getData";
 import { ItemListType } from "@/types";
 
@@ -22,16 +22,7 @@ export default async function Page({ params }: { params: { userid: string } }) {
 	}
 	return (
 		<ul>
-			{posts &&
-				posts.map(
-					(post) =>
-						post && (
-							<Post
-								key={post.id}
-								item={post}
-							/>
-						)
-				)}
+			{posts && <PostWrapper posts={posts} />}
 			{comments &&
 				comments.map(
 					(comment) =>

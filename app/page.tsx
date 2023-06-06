@@ -1,22 +1,7 @@
-import Post from "@/components/Post";
+import PostWrapper from "@/components/PostWrapper";
 import { getPosts } from "@/lib/getData";
 
-export default async function Home() {
+export default async function Page() {
 	const results = await getPosts("topstories");
-	return (
-		<div>
-			<ul>
-				{results &&
-					results.map(
-						(item) =>
-							item && (
-								<Post
-									key={item.id}
-									item={item}
-								/>
-							)
-					)}
-			</ul>
-		</div>
-	);
+	return <>{results && <PostWrapper posts={results} />}</>;
 }

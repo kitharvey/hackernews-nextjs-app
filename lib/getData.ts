@@ -59,8 +59,7 @@ export const getPosts = async (
 ): Promise<ItemListType> => {
 	try {
 		const postIds = await getStories(category);
-		const promises = getItemsList(postIds);
-		return promises;
+		return getItemsList(postIds);
 	} catch (error) {
 		console.error("Error fetching posts:", error);
 		return [];
@@ -70,17 +69,37 @@ export const getPosts = async (
 export const getComments = async (list: ListType): Promise<ItemListType> => {
 	try {
 		const commentsList = await getItemsList(list);
-		const promises = commentsList.map((comment) => {
+		const promises: Promise<void>[] = [];
+
+		commentsList.forEach((comment) => {
 			if (comment && comment.kids) {
-				getItemsList(comment.kids).then(
-					(itemlist) => (comment.comments = itemlist)
-				);
+				const promise = getComments(comment.kids).then((itemlist) => {
+					comment.comments = itemlist;
+				});
+				promises.push(promise);
 			}
-			return comment;
 		});
-		return Promise.all(promises);
+
+		await Promise.all(promises);
+		return commentsList;
 	} catch (error) {
-		console.error("Error fetching posts:", error);
+		console.error("Error fetching comments:", error);
 		return [];
+	}
+};
+
+export const getItemWithComments = async (
+	id: number
+): Promise<ItemType | null> => {
+	try {
+		const itemData = await getItem(id);
+		if (itemData?.kids) {
+			const comments = await Promise.all([getComments(itemData.kids)]);
+			itemData.comments = comments[0];
+		}
+		return itemData;
+	} catch (error) {
+		console.error(`Error fetching item ${id}:`, error);
+		return null;
 	}
 };

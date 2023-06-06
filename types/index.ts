@@ -27,7 +27,7 @@ export type ItemType = {
 	type: ItemTypeType;
 	by: string;
 	time: number;
-	text: string | JSX.Element;
+	text: string;
 	dead: boolean;
 	parent: number;
 	poll: number;
