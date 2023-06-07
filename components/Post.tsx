@@ -14,7 +14,7 @@ const Post: React.FC<PostComponentProps> = ({ item }) => {
 	return (
 		<div className="p-4 rounded-xl">
 			<div className="flex flex-col">
-				<Link href={url ?? `/item/${id}`}>
+				<Link href={url ? url : `/item/${id}`}>
 					<p className="text-lg transition hover:text-accent-light">{title}</p>
 				</Link>
 
