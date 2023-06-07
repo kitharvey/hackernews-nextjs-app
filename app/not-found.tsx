@@ -1,5 +1,5 @@
 import NotFound from "@/components/NotFound";
 
-export default async function Page() {
+export default function Page() {
 	return <NotFound />;
 }

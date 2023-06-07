@@ -26,7 +26,10 @@ const Sidebar = ({}) => {
 					{links.map((link) => {
 						if (link === "topstories")
 							return (
-								<Link href="/">
+								<Link
+									key={link}
+									href="/"
+								>
 									<span
 										className={`capitalize hover:text-accent-light ${
 											pathname === "/" ? "text-accent-light" : ""

@@ -2,6 +2,7 @@ import NotFound from "@/components/NotFound";
 import StoriesPage from "@/components/StoriesPage";
 import { getPosts } from "@/lib/getData";
 import { CategoryType } from "@/types";
+export const runtime = "edge";
 
 export default async function Page({
 	params,
