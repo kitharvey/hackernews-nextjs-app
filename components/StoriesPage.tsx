@@ -1,15 +1,14 @@
-"use client";
 import { ItemListType } from "@/types";
-import React, { useState, MouseEvent } from "react";
+import React from "react";
 import Post from "./Post";
 
-interface PostWrapperProps {
+interface StoriesPageProps {
 	posts: ItemListType;
 }
 
-const PostWrapper: React.FC<PostWrapperProps> = ({ posts }) => {
+const StoriesPage: React.FC<StoriesPageProps> = ({ posts }) => {
 	return (
-		<div className="max-w-4xl p-4">
+		<div>
 			{posts.map(
 				(post) =>
 					post && (
@@ -23,4 +22,4 @@ const PostWrapper: React.FC<PostWrapperProps> = ({ posts }) => {
 	);
 };
 
-export default PostWrapper;
+export default StoriesPage;

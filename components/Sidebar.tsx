@@ -1,9 +1,9 @@
+"use client";
 import Link from "next/link";
 import React from "react";
+import { usePathname } from "next/navigation";
 
-interface SidebarProps {}
-
-const Sidebar: React.FC<SidebarProps> = ({}) => {
+const Sidebar = ({}) => {
 	const links = [
 		"topstories",
 		"newstories",
@@ -12,9 +12,11 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
 		"showstories",
 		"jobstories",
 	];
+
+	const pathname = usePathname();
 	return (
-		<header className="h-full flex grow justify-end relative">
-			<div className="fixed top-0 max-w-xs px-4 py-8 flex flex-col items-end gap-8">
+		<header className="h-full w-1/2 flex justify-end sticky top-0">
+			<div className="max-w-xs p-8 flex flex-col items-end gap-8">
 				<Link href="/">
 					<span className="font-bold text-4xl bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
 						Hackernews
@@ -25,7 +27,11 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
 						if (link === "topstories")
 							return (
 								<Link href="/">
-									<span className="capitalize hover:text-accent-light">
+									<span
+										className={`capitalize hover:text-accent-light ${
+											pathname === "/" ? "text-accent-light" : ""
+										}`}
+									>
 										{link.replace("stories", "")}
 									</span>
 								</Link>
@@ -35,7 +41,11 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
 								key={link}
 								href={link}
 							>
-								<span className="capitalize hover:text-accent-light">
+								<span
+									className={`capitalize hover:text-accent-light ${
+										pathname.includes(link) ? "text-accent-light" : ""
+									}`}
+								>
 									{link.replace("stories", "")}
 								</span>
 							</Link>

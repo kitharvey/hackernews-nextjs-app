@@ -1,4 +1,4 @@
-export default function getTimePassed(unixTimestamp: number): string {
+export const getTimePassed = (unixTimestamp: number): string => {
 	const currentTimestamp: number = Math.floor(Date.now() / 1000);
 	const secondsElapsed: number = currentTimestamp - unixTimestamp;
 
@@ -26,4 +26,4 @@ export default function getTimePassed(unixTimestamp: number): string {
 		const years: number = Math.floor(secondsElapsed / year);
 		return years === 1 ? "1 year ago" : `${years} years ago`;
 	}
-}
+};

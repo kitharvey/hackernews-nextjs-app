@@ -1,4 +1,4 @@
-import getTimePassed from "@/lib/getTimePassed";
+import { getTimePassed } from "@/lib/getTime";
 import { ItemType } from "@/types";
 import Link from "next/link";
 
@@ -7,17 +7,11 @@ interface CommentProps {
 }
 
 const Comment: React.FC<CommentProps> = ({ comment }) => {
-	const { by, text, time, comments } = comment;
+	const { by, text, time, comments, parent } = comment;
 	const timePassed = getTimePassed(time);
 	const markup = { __html: `<div>${text}</div>` };
 	return (
-		<div className="my-4">
-			{text && (
-				<div
-					className="text-sm text-html"
-					dangerouslySetInnerHTML={markup}
-				/>
-			)}
+		<div className="pt-8">
 			<div className="flex gap-2">
 				<p className="text-xs text-gray-light">
 					by{" "}
@@ -27,12 +21,18 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
 				</p>
 				{time && <p className="text-xs text-gray-light">{timePassed}</p>}
 			</div>
+			{text && (
+				<div
+					className="text-sm text-html"
+					dangerouslySetInnerHTML={markup}
+				/>
+			)}
 			{comments &&
 				comments.map(
 					(reply) =>
 						reply && (
 							<div
-								className="pl-4 border-l border-accent"
+								className="pl-4 border-l border-gray-700"
 								key={reply.id}
 							>
 								<Comment comment={reply} />

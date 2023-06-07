@@ -1,4 +1,5 @@
-import PostWrapper from "@/components/PostWrapper";
+import NotFound from "@/components/NotFound";
+import StoriesPage from "@/components/StoriesPage";
 import { getPosts } from "@/lib/getData";
 import { CategoryType } from "@/types";
 
@@ -9,5 +10,13 @@ export default async function Page({
 }) {
 	const { stories } = params;
 	const results = await getPosts(stories);
-	return <>{results && <PostWrapper posts={results} />}</>;
+	return (
+		<>
+			{results && results.length ? (
+				<StoriesPage posts={results} />
+			) : (
+				<NotFound />
+			)}
+		</>
+	);
 }

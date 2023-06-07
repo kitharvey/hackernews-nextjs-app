@@ -9,11 +9,7 @@ import {
 const BASE_URL = "https://hacker-news.firebaseio.com/v0/";
 
 const noCacheFetch = async (url: string): Promise<Response> => {
-	return fetch(url, { cache: "force-cache" });
-};
-
-const removeDeletedItem = (item: ItemType) => {
-	return item.deleted || item.dead ? null : item;
+	return fetch(url, { cache: "no-store" });
 };
 
 export const getStories = async (category: CategoryType): Promise<ListType> => {
