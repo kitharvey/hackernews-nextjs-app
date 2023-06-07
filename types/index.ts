@@ -18,12 +18,13 @@ export type UserType = {
 	id: string;
 	karma: number;
 	submitted: number[];
+	submissions: ItemListType;
 };
 
 export type ItemType = {
 	comment: Promise<ItemListType>;
 	id: number;
-	deleted?: boolean;
+	deleted: boolean;
 	type: ItemTypeType;
 	by: string;
 	time: number;
