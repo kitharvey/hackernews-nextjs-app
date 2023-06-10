@@ -1,44 +1,56 @@
 import { getTimePassed } from "@/lib/getTime";
 import { ItemType } from "@/types";
-import Link from "next/link";
-
+import CommentWrapper from "./CommentWrapper";
+import { useState } from "react";
 interface CommentProps {
-	comment: ItemType;
+	data: ItemType;
 }
 
-const Comment: React.FC<CommentProps> = ({ comment }) => {
-	const { by, text, time, comments, parent } = comment;
+const Comment: React.FC<CommentProps> = ({ data }) => {
+	const [collapse, setCollapse] = useState(false);
+	const { by, text, time, kids, deleted, dead } = data;
 	const timePassed = getTimePassed(time);
 	const markup = { __html: `<div>${text}</div>` };
 	return (
-		<div className="pt-8">
-			<div className="flex gap-2">
-				<p className="text-xs text-gray-light">
-					by{" "}
-					<Link href={`/user/${by}`}>
-						<span className="hover:text-accent-light">{by}</span>
-					</Link>
-				</p>
-				{time && <p className="text-xs text-gray-light">{timePassed}</p>}
-			</div>
-			{text && (
-				<div
-					className="text-sm text-html"
-					dangerouslySetInnerHTML={markup}
-				/>
-			)}
-			{comments &&
-				comments.map(
-					(reply) =>
-						reply && (
-							<div
-								className="pl-4 border-l border-gray-700"
-								key={reply.id}
-							>
-								<Comment comment={reply} />
-							</div>
-						)
+		<div
+			className={`pt-8 max-w-full ${deleted || dead || !by ? "hidden" : ""}`}
+		>
+			<div className="">
+				<div className="flex gap-2">
+					<p className="text-xs text-gray-500">by{" " + by}</p>
+					{time && <p className="text-xs text-gray-500">{timePassed}</p>}
+				</div>
+				{text && (
+					<div
+						className="text-sm text-html"
+						dangerouslySetInnerHTML={markup}
+					/>
 				)}
+			</div>
+			{kids && (
+				<>
+					<button
+						className="group"
+						onClick={() => setCollapse(!collapse)}
+					>
+						<span className="text-xs underline text-gray-500 group-hover:text-orange-500">
+							{collapse ? "collapse" : "show replies"}
+						</span>
+					</button>
+					{collapse &&
+						kids.map(
+							(reply) =>
+								reply && (
+									<div
+										className="pl-4 border-l border-gray-700"
+										key={reply}
+									>
+										<CommentWrapper id={reply} />
+									</div>
+								)
+						)}
+				</>
+			)}
 		</div>
 	);
 };

@@ -12,18 +12,18 @@ export const getTimePassed = (unixTimestamp: number): string => {
 		return "Just now";
 	} else if (secondsElapsed < hour) {
 		const minutes: number = Math.floor(secondsElapsed / minute);
-		return minutes === 1 ? "1 minute ago" : `${minutes} minutes ago`;
+		return minutes === 1 ? "a minute ago" : `${minutes} minutes ago`;
 	} else if (secondsElapsed < day) {
 		const hours: number = Math.floor(secondsElapsed / hour);
-		return hours === 1 ? "1 hour ago" : `${hours} hours ago`;
+		return hours === 1 ? "an hour ago" : `${hours} hours ago`;
 	} else if (secondsElapsed < month) {
 		const days: number = Math.floor(secondsElapsed / day);
-		return days === 1 ? "1 day ago" : `${days} days ago`;
+		return days === 1 ? "a day ago" : `${days} days ago`;
 	} else if (secondsElapsed < year) {
 		const months: number = Math.floor(secondsElapsed / month);
-		return months === 1 ? "1 month ago" : `${months} months ago`;
+		return months === 1 ? "a month ago" : `${months} months ago`;
 	} else {
 		const years: number = Math.floor(secondsElapsed / year);
-		return years === 1 ? "1 year ago" : `${years} years ago`;
+		return years === 1 ? "a year ago" : `${years} years ago`;
 	}
 };
