@@ -1,20 +1,20 @@
-import { ItemListType } from "@/types";
 import React from "react";
-import Post from "./Post";
+import Item from "./Item";
+import { ListType } from "@/types";
 
-interface StoriesPageProps {
-	posts: ItemListType;
+interface PostComponentProps {
+	posts: ListType;
 }
 
-const StoriesPage: React.FC<StoriesPageProps> = ({ posts }) => {
+const StoriesPage: React.FC<PostComponentProps> = ({ posts }) => {
 	return (
 		<div>
 			{posts.map(
 				(post) =>
 					post && (
-						<Post
-							key={post.id}
-							item={post}
+						<Item
+							key={post}
+							id={post}
 						/>
 					)
 			)}

@@ -1,17 +1,22 @@
-import { getTimePassed } from "@/lib/getTime";
-import { ItemType } from "@/types";
-import Link from "next/link";
+"use client";
 
+import { getTimePassed } from "@/lib/getTime";
+import Link from "next/link";
+import useSWR from "swr";
+import { getItem } from "@/lib/getData";
 interface CommentProps {
-	comment: ItemType;
+	id: number;
 }
 
-const Comment: React.FC<CommentProps> = ({ comment }) => {
-	const { by, text, time, comments, parent } = comment;
+const Comment: React.FC<CommentProps> = ({ id }) => {
+	const { data, isLoading } = useSWR(`${id}`, getItem);
+	if (isLoading) return <p>Loading...</p>;
+	if (!data) return <p>Error</p>;
+	const { by, text, time, kids, deleted, dead } = data;
 	const timePassed = getTimePassed(time);
 	const markup = { __html: `<div>${text}</div>` };
 	return (
-		<div className="pt-8">
+		<div className={`pt-8 max-w-full ${deleted && dead ? "hidden" : ""}`}>
 			<div className="flex gap-2">
 				<p className="text-xs text-gray-light">
 					by{" "}
@@ -27,15 +32,15 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
 					dangerouslySetInnerHTML={markup}
 				/>
 			)}
-			{comments &&
-				comments.map(
+			{kids &&
+				kids.map(
 					(reply) =>
 						reply && (
 							<div
 								className="pl-4 border-l border-gray-700"
-								key={reply.id}
+								key={reply}
 							>
-								<Comment comment={reply} />
+								<Comment id={reply} />
 							</div>
 						)
 				)}

@@ -1,10 +1,14 @@
-import NotFound from "@/components/NotFound";
 import UserPage from "@/components/UserPage";
-import { getUserWithSubmissions } from "@/lib/getData";
-export const runtime = "edge";
+import { getUser } from "@/lib/getData";
+import { Suspense } from "react";
 
 export default async function Page({ params }: { params: { userid: string } }) {
 	const { userid } = params;
-	const userData = await getUserWithSubmissions(userid);
-	return <>{userData ? <UserPage user={userData} /> : <NotFound />}</>;
+	const userData = await getUser(userid);
+	if (!userData) return <p>Error</p>;
+	return (
+		<Suspense fallback="loading">
+			<UserPage user={userData} />
+		</Suspense>
+	);
 }

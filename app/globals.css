@@ -5,3 +5,8 @@
 .text-html a:hover {
 	color: #82c8ff;
 }
+
+.text-html * {
+	max-width: 100%;
+	overflow-wrap: anywhere;
+}

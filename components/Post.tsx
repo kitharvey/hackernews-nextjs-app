@@ -3,14 +3,13 @@ import { ItemType } from "@/types";
 import Link from "next/link";
 import React from "react";
 
-interface PostComponentProps {
-	item: ItemType;
+interface PostCardProps {
+	data: ItemType;
 }
 
-const Post: React.FC<PostComponentProps> = ({ item }) => {
-	const { by, title, time, id, score, kids, url } = item;
+const PostCard: React.FC<PostCardProps> = ({ data }) => {
+	const { by, title, time, id, score, kids, url } = data;
 	const timePassed = getTimePassed(time);
-
 	return (
 		<div className="p-4 rounded-xl">
 			<div className="flex flex-col">
@@ -39,4 +38,4 @@ const Post: React.FC<PostComponentProps> = ({ item }) => {
 	);
 };
 
-export default Post;
+export default PostCard;

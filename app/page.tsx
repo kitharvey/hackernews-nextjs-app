@@ -1,8 +1,12 @@
 import StoriesPage from "@/components/StoriesPage";
-import { getPosts } from "@/lib/getData";
-export const runtime = "edge";
+import { getStories } from "@/lib/getData";
+import { Suspense } from "react";
 
 export default async function Page() {
-	const results = await getPosts("topstories");
-	return <>{results && <StoriesPage posts={results} />}</>;
+	const stories = await getStories("topstories");
+	return (
+		<Suspense fallback="loading">
+			<StoriesPage posts={stories} />
+		</Suspense>
+	);
 }

@@ -1,14 +1,13 @@
 import { UserType } from "@/types";
 import React from "react";
-import Post from "./Post";
-import Comment from "./Comment";
+import Item from "./Item";
 
 interface UserPageProps {
 	user: UserType;
 }
 
 const UserPage: React.FC<UserPageProps> = ({ user }) => {
-	const { submissions, created, karma, id, about } = user;
+	const { submitted, created, karma, id, about } = user;
 	const markup = { __html: `<div>${about}</div>` };
 	const cakeday = new Date(created * 1000).toLocaleDateString("en-US");
 	return (
@@ -19,18 +18,14 @@ const UserPage: React.FC<UserPageProps> = ({ user }) => {
 				<p>created: {cakeday}</p>
 				{about && <div dangerouslySetInnerHTML={markup} />}
 			</div>
-			{submissions ? (
+			{submitted ? (
 				<ul>
-					{submissions.map(
-						(submission) =>
-							submission &&
-							submission.type != "comment" && (
-								<Post
-									key={submission.id}
-									item={submission}
-								/>
-							)
-					)}
+					{submitted.map((submission) => (
+						<Item
+							key={submission}
+							id={submission}
+						/>
+					))}
 				</ul>
 			) : (
 				<div className="p-4">
