@@ -1,9 +1,9 @@
 import NotFound from "@/components/NotFound";
 import StoriesPage from "@/components/StoriesPage";
-import { getPosts } from "@/lib/getData";
+import StoriesPageLoader from "@/components/StoriesPageLoader";
+import { getStories } from "@/lib/getData";
 import { CategoryType } from "@/types";
 import { Suspense } from "react";
-export const runtime = "edge";
 
 export default async function Page({
 	params,
@@ -11,11 +11,12 @@ export default async function Page({
 	params: { stories: CategoryType };
 }) {
 	const { stories } = params;
-	const results = await getPosts(stories);
-	if (!results || !results.length) return <NotFound />;
+	const story = stories ? stories : "topstories";
+	const posts = await getStories(story);
+	if (!posts) return <NotFound />;
 	return (
-		<Suspense>
-			<StoriesPage posts={results} />
+		<Suspense fallback={<StoriesPageLoader />}>
+			<StoriesPage posts={posts} />
 		</Suspense>
 	);
 }

@@ -15,14 +15,14 @@ const Sidebar = ({}) => {
 
 	const pathname = usePathname();
 	return (
-		<header className="h-full w-1/2 flex justify-end sticky top-0">
-			<div className="max-w-xs p-8 flex flex-col items-end gap-8">
+		<aside className="h-max w-full md:w-1/3 flex justify-end static md:sticky top-0">
+			<div className="w-full max-w-full md:max-w-xs p-4 md:p-8 flex flex-col items-center md:items-end gap-y-4 md:gap-y-8">
 				<Link href="/">
-					<span className="font-bold text-4xl bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
+					<span className="font-bold text-4xl bg-gradient-to-r from-orange-700 to-orange-500 bg-clip-text text-transparent">
 						Hackernews
 					</span>
 				</Link>
-				<ul className="flex flex-col items-end gap-4">
+				<ul className="flex flex-row md:flex-col items-end md:gap-4 gap-2">
 					{links.map((link) => {
 						if (link === "topstories")
 							return (
@@ -31,8 +31,8 @@ const Sidebar = ({}) => {
 									href="/"
 								>
 									<span
-										className={`capitalize hover:text-accent-light ${
-											pathname === "/" ? "text-accent-light" : ""
+										className={`capitalize font-semibold text-xl hover:text-orange-500 ${
+											pathname === "/" ? "text-orange-500" : ""
 										}`}
 									>
 										{link.replace("stories", "")}
@@ -45,8 +45,8 @@ const Sidebar = ({}) => {
 								href={link}
 							>
 								<span
-									className={`capitalize hover:text-accent-light ${
-										pathname.includes(link) ? "text-accent-light" : ""
+									className={`capitalize font-semibold text-xl hover:text-orange-500 ${
+										pathname.includes(link) ? "text-orange-500" : ""
 									}`}
 								>
 									{link.replace("stories", "")}
@@ -56,7 +56,7 @@ const Sidebar = ({}) => {
 					})}
 				</ul>
 			</div>
-		</header>
+		</aside>
 	);
 };
 

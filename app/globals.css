@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.text-html a {
+	@apply underline;
+}
 .text-html a:hover {
-	color: #82c8ff;
+	@apply text-orange-500;
+}
+
+.text-html * {
+	max-width: 100%;
+	overflow-wrap: anywhere;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
 }

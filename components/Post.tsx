@@ -3,33 +3,28 @@ import { ItemType } from "@/types";
 import Link from "next/link";
 import React from "react";
 
-interface PostComponentProps {
-	item: ItemType;
+interface PostCardProps {
+	data: ItemType;
 }
 
-const Post: React.FC<PostComponentProps> = ({ item }) => {
-	const { by, title, time, id, score, kids, url } = item;
+const PostCard: React.FC<PostCardProps> = ({ data }) => {
+	const { by, title, time, id, score, kids, url } = data;
 	const timePassed = getTimePassed(time);
-
 	return (
-		<div className="p-4 rounded-xl">
+		<div className="p-4">
 			<div className="flex flex-col">
 				<Link href={url ? url : `/item/${id}`}>
-					<p className="text-lg transition hover:text-accent-light">{title}</p>
+					<p className="text-lg transition hover:text-orange-500">{title}</p>
 				</Link>
 
 				<div className="flex gap-2">
-					<p className="text-xs text-lightgray">
-						<Link href={`/user/${by}`}>
-							by <span className="hover:text-accent-light">{by}</span>
-						</Link>
-					</p>
-					{time && <p className="text-xs text-lightgray">{timePassed}</p>}
-					<p className="text-center text-xs text-lightgray">
+					<p className="text-xs text-gray-500">by {by}</p>
+					{time && <p className="text-xs text-gray-500">{timePassed}</p>}
+					<p className="text-center text-xs text-gray-500">
 						{score ? score : 0} points
 					</p>
 					<Link href={`/item/${id}`}>
-						<p className="text-xs text-lightgray hover:text-accent-light">
+						<p className="text-xs text-gray-500 hover:text-orange-500">
 							{kids ? kids.length : 0} comments
 						</p>
 					</Link>
@@ -39,4 +34,4 @@ const Post: React.FC<PostComponentProps> = ({ item }) => {
 	);
 };
 
-export default Post;
+export default PostCard;

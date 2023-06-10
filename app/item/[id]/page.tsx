@@ -1,15 +1,14 @@
 import ItemPage from "@/components/ItemPage";
-import NotFound from "@/components/NotFound";
-import { getItemWithComments } from "@/lib/getData";
+import ItemPageLoader from "@/components/ItemPageLoader";
+import { getItem } from "@/lib/getData";
 import { Suspense } from "react";
-export const runtime = "edge";
 
 export default async function Page({ params }: { params: { id: number } }) {
 	const { id } = params;
-	const data = await getItemWithComments(id);
-	if (!data) return <NotFound />;
+	const data = await getItem(id);
+	if (!data) return <p>Error</p>;
 	return (
-		<Suspense>
+		<Suspense fallback={<ItemPageLoader />}>
 			<ItemPage item={data} />
 		</Suspense>
 	);
