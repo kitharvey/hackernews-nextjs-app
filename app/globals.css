@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.text-html a {
+	@apply underline;
+}
 .text-html a:hover {
-	color: #82c8ff;
+	@apply text-orange-500;
 }
 
 .text-html * {

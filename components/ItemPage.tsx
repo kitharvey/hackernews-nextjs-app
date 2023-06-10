@@ -1,8 +1,10 @@
+"use client";
+
 import { ItemType } from "@/types";
 import Link from "next/link";
 import React from "react";
-import Comment from "./Comment";
 import { getTimePassed } from "@/lib/getTime";
+import CommentWrapper from "./CommentWrapper";
 
 interface ItemPageProps {
 	item: ItemType;
@@ -15,7 +17,7 @@ const ItemPage: React.FC<ItemPageProps> = ({ item }) => {
 	const markup = { __html: `<div>${text}</div>` };
 	return (
 		<>
-			<div className="flex flex-col items-start p-4 pb-8">
+			<div className="flex flex-col items-start py-4">
 				{title && <h1 className="text-3xl">{title}</h1>}
 				{text && (
 					<div
@@ -24,29 +26,24 @@ const ItemPage: React.FC<ItemPageProps> = ({ item }) => {
 					/>
 				)}
 				<div className="flex gap-4">
-					<p className="text-gray-light">
-						by{" "}
-						<Link href={`/user/${by}`}>
-							<span className="hover:text-accent-light">{by}</span>
-						</Link>
-					</p>
-					{time && <p className="text-gray-light">{timePassed}</p>}
+					<p className="text-gray-500">by{" " + by}</p>
+					{time && <p className="text-gray-500">{timePassed}</p>}
 					{domain && (
 						<Link href={url}>
-							<p className="text-gray-light hover:text-accent-light">
+							<p className="underline text-gray-500 hover:text-orange-500">
 								{domain}
 							</p>
 						</Link>
 					)}
-					<p className="text-lightgray">{score ? score : 0} points</p>
-					<p className="text-lightgray">{kids ? kids.length : 0} comments</p>
+					<p className="text-gray-500">{score ? score : 0} points</p>
+					<p className="text-gray-500">{kids ? kids.length : 0} comments</p>
 				</div>
 			</div>
 			{kids ? (
 				kids.map(
 					(comment) =>
 						comment && (
-							<Comment
+							<CommentWrapper
 								key={comment}
 								id={comment}
 							/>
