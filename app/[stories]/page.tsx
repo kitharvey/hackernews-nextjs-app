@@ -13,7 +13,7 @@ export default async function Page({
 	const { stories } = params;
 	const story = stories ? stories : "topstories";
 	const posts = await getStories(story);
-	if (!posts) return <NotFound />;
+	if (!posts || !posts.length) return <NotFound />;
 	return (
 		<Suspense fallback={<StoriesPageLoader />}>
 			<StoriesPage posts={posts} />
