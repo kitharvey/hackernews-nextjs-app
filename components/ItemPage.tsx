@@ -25,7 +25,7 @@ const ItemPage: React.FC<ItemPageProps> = ({ item }) => {
 						dangerouslySetInnerHTML={markup}
 					/>
 				)}
-				<div className="flex gap-4">
+				<div className="flex gap-x-4 flex-col md:flex-row">
 					<p className="text-gray-500">by{" " + by}</p>
 					{time && <p className="text-gray-500">{timePassed}</p>}
 					{domain && (

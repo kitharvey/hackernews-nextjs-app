@@ -11,12 +11,10 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
 	const { by, title, time, id, score, kids, url } = data;
 	const timePassed = getTimePassed(time);
 	return (
-		<div className="p-4 max-w-3xl">
+		<div className="p-4">
 			<div className="flex flex-col">
 				<Link href={url ? url : `/item/${id}`}>
-					<p className="text-lg transition hover:text-orange-500 whitespace-nowrap overflow-hidden truncate">
-						{title}
-					</p>
+					<p className="text-lg transition hover:text-orange-500">{title}</p>
 				</Link>
 
 				<div className="flex gap-2">

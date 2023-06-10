@@ -19,10 +19,10 @@ export default function RootLayout({
 			<body
 				className={`${inter.className} bg-gray-950 text-gray-50 min-h-screen w-full`}
 			>
-				<div className="flex w-full">
+				<div className="flex w-full flex-col md:flex-row">
 					<Sidebar />
-					<main className="w-2/3">
-						<div className="p-4 max-w-3xl">{children}</div>
+					<main className="w-full md:w-2/3 max-w-3xl">
+						<div className="p-4">{children}</div>
 					</main>
 				</div>
 			</body>

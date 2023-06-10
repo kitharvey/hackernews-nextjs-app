@@ -28,7 +28,7 @@ const StoriesPage: React.FC<PostComponentProps> = ({ posts }) => {
 						)
 				)}
 			</div>
-			<div className="p-4">
+			<div className="p-4 flex md:justify-start justify-center w-full">
 				<button
 					disabled={page >= posts.length}
 					onClick={handleClick}
