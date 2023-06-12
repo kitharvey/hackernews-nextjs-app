@@ -13,21 +13,21 @@ export default {
 	stacks(app) {
 		app.stack(function Site({ stack }) {
 			const arn =
-				"arn:aws:acm:us-east-1:584125941279:certificate/375c1364-88c5-4089-8e54-32fdba02ad83";
+				"arn:aws:acm:ap-southeast-1:584125941279:certificate/5e8431c4-faa6-453c-9bde-709c89aa97a2";
 
 			const site = new NextjsSite(stack, "next", {
-				// customDomain: {
-				// 	isExternalDomain: true,
-				// 	domainName: "hackernews-nextapp.kitharvey.cc",
-				// 	alternateNames: ["www.hackernews-nextapp.kitharvey.cc"],
-				// 	cdk: {
-				// 		certificate: Certificate.fromCertificateArn(
-				// 			stack,
-				// 			"Certificate",
-				// 			arn
-				// 		),
-				// 	},
-				// },
+				customDomain: {
+					isExternalDomain: true,
+					domainName: "hackernews.kitharvey.cc",
+					alternateNames: ["dev.hackernews.kitharvey.cc"],
+					cdk: {
+						certificate: Certificate.fromCertificateArn(
+							stack,
+							"Certificate",
+							arn
+						),
+					},
+				},
 			});
 
 			stack.addOutputs({
