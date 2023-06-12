@@ -13,7 +13,7 @@ export default {
 	stacks(app) {
 		app.stack(function Site({ stack }) {
 			const arn =
-				"arn:aws:acm:ap-southeast-1:584125941279:certificate/5e8431c4-faa6-453c-9bde-709c89aa97a2";
+				"arn:aws:acm:us-east-1:584125941279:certificate/ee1037f4-bbdf-472b-88d8-0bb75bc85905";
 
 			const site = new NextjsSite(stack, "next", {
 				customDomain: {
