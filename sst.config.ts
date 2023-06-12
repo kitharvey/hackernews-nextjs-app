@@ -16,18 +16,18 @@ export default {
 				"arn:aws:acm:us-east-1:584125941279:certificate/375c1364-88c5-4089-8e54-32fdba02ad83";
 
 			const site = new NextjsSite(stack, "next", {
-				customDomain: {
-					isExternalDomain: true,
-					domainName: "hackernews-nextapp.kitharvey.cc",
-					alternateNames: ["www.hackernews-nextapp.kitharvey.cc"],
-					cdk: {
-						certificate: Certificate.fromCertificateArn(
-							stack,
-							"Certificate",
-							arn
-						),
-					},
-				},
+				// customDomain: {
+				// 	isExternalDomain: true,
+				// 	domainName: "hackernews-nextapp.kitharvey.cc",
+				// 	alternateNames: ["www.hackernews-nextapp.kitharvey.cc"],
+				// 	cdk: {
+				// 		certificate: Certificate.fromCertificateArn(
+				// 			stack,
+				// 			"Certificate",
+				// 			arn
+				// 		),
+				// 	},
+				// },
 			});
 
 			stack.addOutputs({
